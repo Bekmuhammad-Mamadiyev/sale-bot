@@ -13,3 +13,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    qty = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+class Sale(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+    client_name = models.CharField(max_length=100)
+    create_at = models.DateField(auto_now_add=True)
+    qty = models.IntegerField()
